@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
 WORKDIR /src
 
 COPY hello-world-api/*.csproj ./hello-world-api/
@@ -10,7 +10,7 @@ WORKDIR /src/hello-world-api
 RUN dotnet publish -c Release -o /app/out --no-restore
 
 # Stage 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
 
